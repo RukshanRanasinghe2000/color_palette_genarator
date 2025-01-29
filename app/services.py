@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from skimage.util import img_as_float
 from skimage.io import imread
+import json
 
 
 def rgb_to_hex(rgb):
@@ -64,4 +65,14 @@ def process_image(image_path, n_colors=3):
 
     hex_colors = [rgb_to_hex(color) for color in centers]
 
-    return centers, hex_colors
+    # Create the output as a dictionary
+    color_data = {}
+    for i, center in enumerate(centers):
+        hex_color = rgb_to_hex(center)
+        color_data[f"Color {i + 1}"] = {
+            "RGB": center.tolist(),
+            "Hex": hex_color
+        }
+
+    # Return the dictionary as JSON
+    return json.dumps(color_data, indent=4)
