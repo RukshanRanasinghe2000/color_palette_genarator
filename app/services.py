@@ -20,7 +20,7 @@ def rgb_to_hex(rgb):
     )
 
 
-def process_image(image_path, n_colors=3):
+def process_image(image, n_colors=3):
     """
        Process an image to extract dominant colors using K-Means clustering.
        Parameters:
@@ -34,7 +34,7 @@ def process_image(image_path, n_colors=3):
        """
 
     # Load and prepare the image
-    logo = img_as_float(imread(image_path))
+    logo = img_as_float(image)
     print(f"Image shape: {logo.shape}")
 
     # Handle RGBA to RGB conversion if necessary
