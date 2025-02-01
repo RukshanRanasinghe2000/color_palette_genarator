@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette</title>
+     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <style rel="./css/navbar.css"></style>
+</head>
+    <body>
+            <div class="flex justify-center rounded-md shadow-xl transition duration-300 hover:scale-105">
+                <div>
+                     <div id="image-preview" class="mt-4"></div>
+                </div>
+                <div>
+                    <form hx-encoding="multipart/form-data"
+                      hx-post="http://127.0.0.1:8000/api/image_upload/"
+                      _="on htmx:xhr:progress(loaded, total) set #progress.value to (loaded/total)*100"
+                      id="drop-area"
+                      class="border-2 border-dashed border-gray-400 p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer text-gray-600"
+                      ondragover="event.preventDefault()"
+                      ondrop="handleDrop(event)">
+
+<!--                    <p>Drag & Drop your file here or click to select</p>-->
+
+                    <input type="file" name="file" id="fileInput" class="hidden" accept="image/*"
+                           hx-trigger="change" hx-target="#image-preview" hx-swap="outerHTML">
+
+                    <div class="flex space-x-4 mt-2">
+                        <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded" onclick="document.getElementById('fileInput').click()">Select Image</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
+                    </div>
+
+                    <progress id="progress" value="0" max="100" class="w-full mt-2"></progress>
+
+                </form>
+                </div>
+
+            </div>
+            <script>
+                document.getElementById('fileInput').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const previewDiv = document.getElementById("image-preview");
+                            previewDiv.innerHTML = `<img src="${e.target.result}" class="max-w-full h-40 mt-2 rounded-lg shadow">`;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
+
+    </body>
+</html>

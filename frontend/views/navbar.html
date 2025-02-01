@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette</title>
+     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <style rel="./css/navbar.css"></style>
+</head>
+<body class="h-[500px]">
+<!-- navbar.html -->
+<div class="flex justify-center">
+<nav class="bg-gradient-to-r from-teal-400 to-yellow-200 text-black p-4 w-[calc(100%-300px)] rounded-xl mt-10 shadow-xl fixed motion-safe:animate-[bounce_2s_infinite]" >
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="#" class="text-xl font-bold">MySite</a>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="lg:hidden text-white focus:outline-none">
+      ☰
+    </button>
+
+    <!-- Menu Items -->
+    <div id="menu" class="hidden lg:flex space-x-4">
+      <a href="/" class="hover:text-gray-300 hover:bg-sky-700">Home</a>
+      <a href="/about" class="hover:text-gray-300">About</a>
+      <a href="/services" class="hover:text-gray-300">Services</a>
+      <a href="/contact" class="hover:text-gray-300">Contact</a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (HTMX toggles this) -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-blue-700 p-2">
+    <a href="/" class="block text-white py-1">Home</a>
+    <a href="/about" class="block text-white py-1">About</a>
+    <a href="/services" class="block text-white py-1">Services</a>
+    <a href="/contact" class="block text-white py-1">Contact</a>
+  </div>
+</nav>
+</div>
+<script>
+  document.getElementById("menu-btn").addEventListener("click", function () {
+    document.getElementById("mobile-menu").classList.toggle("hidden");
+  });
+</script>
+
+</body>
+</html>

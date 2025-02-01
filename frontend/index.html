@@ -6,15 +6,13 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Palette</title>
      <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
- <form hx-encoding='multipart/form-data' hx-post='http://127.0.0.1:8000/api/image_upload/'
-          _='on htmx:xhr:progress(loaded, total) set #progress.value to (loaded/total)*100'>
-        <input type='file' name='file'>
-        <button>
-            Upload
-        </button>
-        <progress id='progress' value='0' max='100'></progress>
-    </form>
+
+ <!-- HTMX dynamically loads the navbar -->
+  <div hx-get="./views/navbar.html" hx-trigger="load"></div>
+
+  <div class="flex justify-center items-center h-screen" hx-get="./views/drag_and_drop.html" hx-trigger="load"></div>
 </body>
 </html>
