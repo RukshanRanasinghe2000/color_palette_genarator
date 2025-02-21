@@ -1,4 +1,4 @@
-# color_palette_genarator V1.0.0.
+# color_palette_genarator V1.0.0
  color palette generator using images. based on python and FastAPI 
 
  # 🖌️ RGB to HEX Color Extraction
